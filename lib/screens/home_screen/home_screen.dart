@@ -7,21 +7,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Screen'),
-        backgroundColor: Colors.blue,
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Reset',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
+    return SingleChildScrollView(
+      child: Column(
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
