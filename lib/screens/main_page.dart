@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hogwarts/screens/home_screen/home_screen.dart';
 import 'package:hogwarts/screens/list_screen/list_screen.dart';
+import 'package:hogwarts/widgets/stats_card.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -27,7 +28,29 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: _bodyWidget[_selectedIndex],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: StatsCard(count: 4, title: 'Total'),
+                  ),
+                  Expanded(
+                    child: StatsCard(count: 3, title: 'Success'),
+                  ),
+                  Expanded(
+                    child: StatsCard(count: 1, title: 'Failed'),
+                  ),
+                ],
+              ),
+            ),
+            _bodyWidget[_selectedIndex],
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
