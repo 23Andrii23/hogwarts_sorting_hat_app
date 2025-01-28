@@ -64,7 +64,6 @@ class MainPageController extends _$MainPageController {
   }
 
   void pullToRefresh() {
-    debugPrint('pullToRefresh');
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),

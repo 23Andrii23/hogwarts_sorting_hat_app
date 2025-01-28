@@ -40,39 +40,47 @@ class _MainPageState extends ConsumerState<MainPage> {
           ],
         ),
         body: RefreshIndicator(
-          onRefresh: () async {
-            ref.read(mainPageControllerProvider.notifier).pullToRefresh();
-          },
+          onRefresh: () async =>
+              ref.read(mainPageControllerProvider.notifier).pullToRefresh(),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: StatsCard(
-                          count: state.totalAttempts,
-                          title: 'Total',
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height -
+                    AppBar().preferredSize.height -
+                    MediaQuery.of(context).padding.top -
+                    kBottomNavigationBarHeight,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: StatsCard(
+                            count: state.totalAttempts,
+                            title: 'Total',
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: StatsCard(
-                          count: state.successAttempts,
-                          title: 'Success',
+                        Expanded(
+                          child: StatsCard(
+                            count: state.successAttempts,
+                            title: 'Success',
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: StatsCard(
-                          count: state.failedAttempts,
-                          title: 'Failed',
+                        Expanded(
+                          child: StatsCard(
+                            count: state.failedAttempts,
+                            title: 'Failed',
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                _bodyWidget(state.characterInfo)[_selectedIndex],
-              ],
+                  _bodyWidget(state.characterInfo)[_selectedIndex],
+                ],
+              ),
             ),
           ),
         ),
