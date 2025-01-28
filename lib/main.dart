@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hogwarts/screens/home_screen/home_screen.dart';
 import 'package:hogwarts/screens/main_page.dart';
 
 void main() {

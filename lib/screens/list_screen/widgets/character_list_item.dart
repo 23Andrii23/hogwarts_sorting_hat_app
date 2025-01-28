@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hogwarts/screens/details_screen/character_details_screen.dart';
 
 class CharacterListItem extends StatelessWidget {
   final String name;
@@ -20,7 +21,11 @@ class CharacterListItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
         onTap: () {
-          debugPrint('Tapped on $name');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CharacterDetailsScreen(name: name),
+            ),
+          );
         },
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(4),

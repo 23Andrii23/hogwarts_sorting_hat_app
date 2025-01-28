@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hogwarts/screens/home_screen/widgets/house_card.dart';
-import 'package:hogwarts/widgets/stats_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
