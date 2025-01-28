@@ -17,7 +17,7 @@ class StatsCard extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 2),
       ),
-      height: 100,
+      height: 75,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hogwarts/screens/home_screen/home_screen.dart';
+import 'package:hogwarts/screens/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const MainPage(),
     );
   }
 }
