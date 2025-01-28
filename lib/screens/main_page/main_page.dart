@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hogwarts/models/character_info_model.dart';
 import 'package:hogwarts/screens/home_screen/home_screen.dart';
 import 'package:hogwarts/screens/list_screen/list_screen.dart';
 import 'package:hogwarts/screens/main_page/controller/main_page.controller.dart';
-import 'package:hogwarts/service/main_info.dart';
 import 'package:hogwarts/widgets/stats_card.dart';
 
 class MainPage extends ConsumerStatefulWidget {
@@ -30,7 +30,7 @@ class _MainPageState extends ConsumerState<MainPage> {
           actions: [
             TextButton(
               onPressed: () {
-                MainInfo().fetchCharacters();
+                ref.read(mainPageControllerProvider.notifier).reset();
               },
               child: const Text(
                 'Reset',
@@ -39,36 +39,41 @@ class _MainPageState extends ConsumerState<MainPage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: StatsCard(
-                        count: state.totalAttempts,
-                        title: 'Total',
+        body: RefreshIndicator(
+          onRefresh: () async {
+            ref.read(mainPageControllerProvider.notifier).pullToRefresh();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: StatsCard(
+                          count: state.totalAttempts,
+                          title: 'Total',
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: StatsCard(
-                        count: state.successAttempts,
-                        title: 'Success',
+                      Expanded(
+                        child: StatsCard(
+                          count: state.successAttempts,
+                          title: 'Success',
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: StatsCard(
-                        count: state.failedAttempts,
-                        title: 'Failed',
+                      Expanded(
+                        child: StatsCard(
+                          count: state.failedAttempts,
+                          title: 'Failed',
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              _bodyWidget[_selectedIndex],
-            ],
+                _bodyWidget(state.characterInfo)[_selectedIndex],
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -93,8 +98,10 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  final List<Widget> _bodyWidget = const [
-    HomeScreen(),
-    ListScreen(),
-  ];
+  List<Widget> _bodyWidget(CharacterInfo character) {
+    return [
+      HomeScreen(characterInfo: character),
+      const ListScreen(),
+    ];
+  }
 }
