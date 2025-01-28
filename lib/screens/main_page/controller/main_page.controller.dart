@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hogwarts/models/character_info_model.dart';
 import 'package:hogwarts/service/main_info.dart';
