@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hogwarts/models/character_info_model.dart';
 import 'package:hogwarts/screens/home_screen/widgets/house_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final CharacterInfo characterInfo;
+  const HomeScreen({
+    required this.characterInfo,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +19,16 @@ class HomeScreen extends StatelessWidget {
             children: [
               ClipRRect(
                 child: Image.network(
-                  'https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Harry_Potter_character_poster.jpg/220px-Harry_Potter_character_poster.jpg',
+                  characterInfo.image ?? '',
                   height: 200,
                   width: 150,
                   fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Harry Potter',
-                style: TextStyle(
+              Text(
+                characterInfo.name ?? '',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

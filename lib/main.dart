@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hogwarts/screens/main_page.dart';
+import 'package:hogwarts/screens/main_page/main_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
