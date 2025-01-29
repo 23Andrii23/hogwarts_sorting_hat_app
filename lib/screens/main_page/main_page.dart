@@ -111,7 +111,6 @@ class _MainPageState extends ConsumerState<MainPage> {
       HomeScreen(
         characterInfo: character,
         onHouseSelected: (house) {
-          debugPrint('House selected: $house');
           ref.read(mainPageControllerProvider.notifier).checkAnswer(house);
         },
       ),

@@ -52,14 +52,20 @@ class MainPageController extends _$MainPageController {
       final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
           (house == currentCharacter.house);
 
+      final characterIndex =
+          _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
+      if (characterIndex != -1) {
+        _characterInfo[characterIndex] = currentCharacter.copyWith(
+          failedAttempts: isCorrectAnswer
+              ? currentCharacter.failedAttempts
+              : currentCharacter.failedAttempts + 1,
+          isSucceed: isCorrectAnswer,
+        );
+      }
+
       state = AsyncData(
         value.copyWith(
-          characterInfo: currentCharacter.copyWith(
-            failedAttempts: isCorrectAnswer
-                ? currentCharacter.failedAttempts
-                : currentCharacter.failedAttempts + 1,
-            isSucceed: isCorrectAnswer,
-          ),
+          characterInfo: _characterInfo[characterIndex],
           totalAttempts: value.totalAttempts + 1,
           successAttempts: isCorrectAnswer
               ? value.successAttempts + 1
@@ -80,6 +86,13 @@ class MainPageController extends _$MainPageController {
   }
 
   void reset() {
+    for (final element in _characterInfo) {
+      _characterInfo[_characterInfo.indexOf(element)] = element.copyWith(
+        failedAttempts: 0,
+        isSucceed: false,
+      );
+    }
+
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),

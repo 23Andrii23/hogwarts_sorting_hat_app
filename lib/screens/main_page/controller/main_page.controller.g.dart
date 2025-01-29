@@ -7,7 +7,7 @@ part of 'main_page.controller.dart';
 // **************************************************************************
 
 String _$mainPageControllerHash() =>
-    r'6ed520a00c238a7519193c1f7300dee59ab99266';
+    r'7b353ba84efd7e39510311595ddcd656e3b04b28';
 
 /// See also [MainPageController].
 @ProviderFor(MainPageController)
