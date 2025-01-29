@@ -108,7 +108,13 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   List<Widget> _bodyWidget(CharacterInfo character) {
     return [
-      HomeScreen(characterInfo: character),
+      HomeScreen(
+        characterInfo: character,
+        onHouseSelected: (house) {
+          debugPrint('House selected: $house');
+          ref.read(mainPageControllerProvider.notifier).checkAnswer(house);
+        },
+      ),
       const ListScreen(),
     ];
   }

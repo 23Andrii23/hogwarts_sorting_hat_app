@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class HouseCard extends StatelessWidget {
   final String house;
   final String icon;
+  final VoidCallback onTap;
 
   const HouseCard({
-    super.key,
     required this.house,
     required this.icon,
+    required this.onTap,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        debugPrint('House: $house');
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
