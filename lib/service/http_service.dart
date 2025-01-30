@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hogwarts/models/character_info.model.dart';
 import 'package:http/http.dart' as http;
 
-class MainInfo {
+class HttpService {
   Future<List<CharacterInfo>> fetchCharacters() async {
     try {
       final response = await http

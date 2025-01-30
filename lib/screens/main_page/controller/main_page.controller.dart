@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hogwarts/models/character_info.model.dart';
-import 'package:hogwarts/service/main_info.dart';
+import 'package:hogwarts/service/http_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'dart:math';
 
@@ -19,7 +19,7 @@ class MainPageState with _$MainPageState {
 
 @riverpod
 class MainPageController extends _$MainPageController {
-  final MainInfo _mainInfo = MainInfo();
+  final _httpService = HttpService();
   final List<CharacterInfo> _characterInfo = [];
 
   List<CharacterInfo> get characterInfo => _characterInfo;
@@ -30,8 +30,7 @@ class MainPageController extends _$MainPageController {
     await init();
 
     return MainPageState(
-      // characterInfo: getRandCharacter(),
-      characterInfo: _characterInfo[0],
+      characterInfo: getRandCharacter(),
       totalAttempts: 0,
       successAttempts: 0,
       failedAttempts: 0,
@@ -39,7 +38,7 @@ class MainPageController extends _$MainPageController {
   }
 
   Future<void> init() async {
-    final characterInfo = await _mainInfo.fetchCharacters();
+    final characterInfo = await _httpService.fetchCharacters();
     _characterInfo.addAll(characterInfo);
   }
 
@@ -48,56 +47,17 @@ class MainPageController extends _$MainPageController {
     return randomItem;
   }
 
-  // void checkAnswer(String? house) {
-  //   state.whenData((value) {
-  //     final currentCharacter = value.characterInfo;
-  //     final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
-  //         (house == currentCharacter.house);
-  //
-  //     final characterIndex =
-  //         _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
-  //     if (characterIndex != -1) {
-  //       final wasSuccessfulBefore = _characterInfo[characterIndex].isSucceed;
-  //
-  //       _characterInfo[characterIndex] = currentCharacter.copyWith(
-  //         failedAttempts: isCorrectAnswer
-  //             ? currentCharacter.failedAttempts
-  //             : currentCharacter.failedAttempts + 1,
-  //         totalAttempts: currentCharacter.totalAttempts + 1,
-  //         isSucceed: isCorrectAnswer,
-  //       );
-  //
-  //       state = AsyncData(
-  //         value.copyWith(
-  //           characterInfo: _characterInfo[characterIndex],
-  //           totalAttempts: value.totalAttempts + 1,
-  //           successAttempts: (isCorrectAnswer && !wasSuccessfulBefore)
-  //               ? value.successAttempts + 1
-  //               : value.successAttempts,
-  //           failedAttempts: isCorrectAnswer
-  //               ? value.failedAttempts
-  //               : value.failedAttempts + 1,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
-
-  // MainPageController
-  bool checkAnswer(String? house) {
-    bool isCorrectGuess = false;
-
+  void checkAnswer(String? house) {
     state.whenData((value) {
       final currentCharacter = value.characterInfo;
 
-      // Якщо вже вгадано, просто повертаємо true
-      if (currentCharacter.isSucceed) {
-        isCorrectGuess = true;
-        return;
-      }
+      if (currentCharacter.isSucceed) return;
 
-      final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
-          (house == currentCharacter.house);
+      final normalizedHouse =
+          house?.trim().isEmpty == true ? null : house?.trim();
+      final isCorrectAnswer =
+          (normalizedHouse == null && currentCharacter.house?.trim() == '') ||
+              (normalizedHouse == currentCharacter.house?.trim());
 
       final characterIndex =
           _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
@@ -124,12 +84,8 @@ class MainPageController extends _$MainPageController {
                 : value.failedAttempts + 1,
           ),
         );
-
-        isCorrectGuess = isCorrectAnswer;
       }
     });
-
-    return isCorrectGuess;
   }
 
   void pullToRefresh() {
