@@ -5,9 +5,11 @@ import 'package:hogwarts/screens/character_details_screen/character_details_scre
 
 class CharacterListItem extends StatelessWidget {
   final CharacterInfo character;
+  final VoidCallback onRefresh;
 
   const CharacterListItem({
     required this.character,
+    required this.onRefresh,
     super.key,
   });
 
@@ -41,7 +43,7 @@ class CharacterListItem extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Attempts: ${character.failedAttempts}',
+          'Attempts: ${character.totalAttempts}',
           style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,
@@ -53,7 +55,7 @@ class CharacterListItem extends StatelessWidget {
             if (!character.isSucceed)
               IconButton(
                 icon: const Icon(Icons.refresh),
-                onPressed: () {},
+                onPressed: onRefresh,
               ),
             Icon(
               character.isSucceed ? Icons.check_circle : Icons.cancel,

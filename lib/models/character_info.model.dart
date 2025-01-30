@@ -20,6 +20,7 @@ class CharacterInfo with _$CharacterInfo {
     required String? eyeColour,
     required String? hairColour,
     @Default(0) int failedAttempts,
+    @Default(0) int totalAttempts,
     @Default(false) bool isSucceed,
   }) = _CharacterInfo;
 

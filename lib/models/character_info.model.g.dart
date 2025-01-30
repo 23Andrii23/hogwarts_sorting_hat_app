@@ -23,6 +23,7 @@ _$CharacterInfoImpl _$$CharacterInfoImplFromJson(Map<String, dynamic> json) =>
       eyeColour: json['eyeColour'] as String?,
       hairColour: json['hairColour'] as String?,
       failedAttempts: (json['failedAttempts'] as num?)?.toInt() ?? 0,
+      totalAttempts: (json['totalAttempts'] as num?)?.toInt() ?? 0,
       isSucceed: json['isSucceed'] as bool? ?? false,
     );
 
@@ -41,5 +42,6 @@ Map<String, dynamic> _$$CharacterInfoImplToJson(_$CharacterInfoImpl instance) =>
       'eyeColour': instance.eyeColour,
       'hairColour': instance.hairColour,
       'failedAttempts': instance.failedAttempts,
+      'totalAttempts': instance.totalAttempts,
       'isSucceed': instance.isSucceed,
     };

@@ -33,6 +33,7 @@ mixin _$CharacterInfo {
   String? get eyeColour => throw _privateConstructorUsedError;
   String? get hairColour => throw _privateConstructorUsedError;
   int get failedAttempts => throw _privateConstructorUsedError;
+  int get totalAttempts => throw _privateConstructorUsedError;
   bool get isSucceed => throw _privateConstructorUsedError;
 
   /// Serializes this CharacterInfo to a JSON map.
@@ -65,6 +66,7 @@ abstract class $CharacterInfoCopyWith<$Res> {
       String? eyeColour,
       String? hairColour,
       int failedAttempts,
+      int totalAttempts,
       bool isSucceed});
 
   $WandModelCopyWith<$Res>? get wand;
@@ -98,6 +100,7 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
     Object? eyeColour = freezed,
     Object? hairColour = freezed,
     Object? failedAttempts = null,
+    Object? totalAttempts = null,
     Object? isSucceed = null,
   }) {
     return _then(_value.copyWith(
@@ -153,6 +156,10 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
+      totalAttempts: null == totalAttempts
+          ? _value.totalAttempts
+          : totalAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
       isSucceed: null == isSucceed
           ? _value.isSucceed
           : isSucceed // ignore: cast_nullable_to_non_nullable
@@ -197,6 +204,7 @@ abstract class _$$CharacterInfoImplCopyWith<$Res>
       String? eyeColour,
       String? hairColour,
       int failedAttempts,
+      int totalAttempts,
       bool isSucceed});
 
   @override
@@ -229,6 +237,7 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
     Object? eyeColour = freezed,
     Object? hairColour = freezed,
     Object? failedAttempts = null,
+    Object? totalAttempts = null,
     Object? isSucceed = null,
   }) {
     return _then(_$CharacterInfoImpl(
@@ -284,6 +293,10 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
+      totalAttempts: null == totalAttempts
+          ? _value.totalAttempts
+          : totalAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
       isSucceed: null == isSucceed
           ? _value.isSucceed
           : isSucceed // ignore: cast_nullable_to_non_nullable
@@ -309,6 +322,7 @@ class _$CharacterInfoImpl implements _CharacterInfo {
       required this.eyeColour,
       required this.hairColour,
       this.failedAttempts = 0,
+      this.totalAttempts = 0,
       this.isSucceed = false});
 
   factory _$CharacterInfoImpl.fromJson(Map<String, dynamic> json) =>
@@ -343,11 +357,14 @@ class _$CharacterInfoImpl implements _CharacterInfo {
   final int failedAttempts;
   @override
   @JsonKey()
+  final int totalAttempts;
+  @override
+  @JsonKey()
   final bool isSucceed;
 
   @override
   String toString() {
-    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus, wand: $wand, ancestry: $ancestry, eyeColour: $eyeColour, hairColour: $hairColour, failedAttempts: $failedAttempts, isSucceed: $isSucceed)';
+    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus, wand: $wand, ancestry: $ancestry, eyeColour: $eyeColour, hairColour: $hairColour, failedAttempts: $failedAttempts, totalAttempts: $totalAttempts, isSucceed: $isSucceed)';
   }
 
   @override
@@ -374,6 +391,8 @@ class _$CharacterInfoImpl implements _CharacterInfo {
                 other.hairColour == hairColour) &&
             (identical(other.failedAttempts, failedAttempts) ||
                 other.failedAttempts == failedAttempts) &&
+            (identical(other.totalAttempts, totalAttempts) ||
+                other.totalAttempts == totalAttempts) &&
             (identical(other.isSucceed, isSucceed) ||
                 other.isSucceed == isSucceed));
   }
@@ -395,6 +414,7 @@ class _$CharacterInfoImpl implements _CharacterInfo {
       eyeColour,
       hairColour,
       failedAttempts,
+      totalAttempts,
       isSucceed);
 
   /// Create a copy of CharacterInfo
@@ -428,6 +448,7 @@ abstract class _CharacterInfo implements CharacterInfo {
       required final String? eyeColour,
       required final String? hairColour,
       final int failedAttempts,
+      final int totalAttempts,
       final bool isSucceed}) = _$CharacterInfoImpl;
 
   factory _CharacterInfo.fromJson(Map<String, dynamic> json) =
@@ -459,6 +480,8 @@ abstract class _CharacterInfo implements CharacterInfo {
   String? get hairColour;
   @override
   int get failedAttempts;
+  @override
+  int get totalAttempts;
   @override
   bool get isSucceed;
 

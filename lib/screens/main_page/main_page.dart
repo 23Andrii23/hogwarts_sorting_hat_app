@@ -76,7 +76,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                   ],
                 ),
               ),
-              _bodyWidget(state.characterInfo)[_selectedIndex],
+              Expanded(child: _bodyWidget(state.characterInfo)[_selectedIndex]),
             ],
           ),
         ),
