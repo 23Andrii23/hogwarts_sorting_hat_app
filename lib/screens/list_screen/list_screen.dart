@@ -16,22 +16,37 @@ class ListScreen extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => Center(child: Text(error.toString())),
       data: (characters) {
-        return Column(
-          children: [
-            SearchField(
-              onChanged: notifier.searchCharacter,
-              onClear: notifier.resetSearch,
-            ),
-            const SizedBox(height: 10),
-            if (characters.isEmpty)
-              const Center(
-                child: Text('No characters found'),
-              )
-            else
-              ...characters.map(
-                (character) => CharacterListItem(character: character),
+        return SizedBox(
+          height: MediaQuery.of(context).size.height -
+              kToolbarHeight -
+              MediaQuery.of(context).padding.top -
+              kBottomNavigationBarHeight,
+          child: Column(
+            children: [
+              SearchField(
+                onChanged: notifier.searchCharacter,
+                onClear: notifier.resetSearch,
               ),
-          ],
+              const SizedBox(height: 10),
+              if (characters.isEmpty)
+                const Center(
+                  child: Text('No characters found'),
+                )
+              else
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: characters.length,
+                    itemBuilder: (context, index) {
+                      final character = characters[index];
+                      return CharacterListItem(
+                        character: character,
+                        onRefresh: () => notifier.setCharacterInfo(character),
+                      );
+                    },
+                  ),
+                ),
+            ],
+          ),
         );
       },
     );

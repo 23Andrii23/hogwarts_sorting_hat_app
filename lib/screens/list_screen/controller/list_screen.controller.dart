@@ -43,4 +43,10 @@ class ListScreenController extends _$ListScreenController {
   void resetSearch() {
     state = AsyncData(_filteredList);
   }
+
+  void setCharacterInfo(CharacterInfo characterInfo) {
+    ref
+        .read(mainPageControllerProvider.notifier)
+        .setCharacterInfo(characterInfo);
+  }
 }

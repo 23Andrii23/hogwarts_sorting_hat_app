@@ -109,4 +109,15 @@ class MainPageController extends _$MainPageController {
       ));
     });
   }
+
+  void setCharacterInfo(CharacterInfo characterInfo) {
+    state.whenData((value) {
+      state = AsyncData(value.copyWith(
+        characterInfo: characterInfo,
+        totalAttempts: value.totalAttempts,
+        successAttempts: value.successAttempts,
+        failedAttempts: value.failedAttempts,
+      ));
+    });
+  }
 }
