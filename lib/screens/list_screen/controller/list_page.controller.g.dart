@@ -7,7 +7,7 @@ part of 'list_page.controller.dart';
 // **************************************************************************
 
 String _$listPageControllerHash() =>
-    r'2fb0d30681705e9f0d3ffc31b30820c3f3d7fc43';
+    r'e47f14ba13baf9eda7b771bf4eddea9d48ec8914';
 
 /// See also [ListPageController].
 @ProviderFor(ListPageController)

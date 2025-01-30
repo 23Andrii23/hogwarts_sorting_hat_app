@@ -15,7 +15,7 @@ class ListPageController extends _$ListPageController {
       data: (state) {
         final mainController = ref.read(mainPageControllerProvider.notifier);
         return mainController.characterInfo
-            .where((element) => element.failedAttempts > 0)
+            .where((element) => element.isSucceed || element.failedAttempts > 0)
             .toList();
       },
       loading: () => [],

@@ -41,7 +41,7 @@ class CharacterListItem extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Attempts: ${character.failedAttempts}',
+          'Attempts: ${character.totalAttempts}',
           style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,

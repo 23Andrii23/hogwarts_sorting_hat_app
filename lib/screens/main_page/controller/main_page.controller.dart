@@ -21,6 +21,7 @@ class MainPageState with _$MainPageState {
 class MainPageController extends _$MainPageController {
   final MainInfo _mainInfo = MainInfo();
   final List<CharacterInfo> _characterInfo = [];
+
   List<CharacterInfo> get characterInfo => _characterInfo;
   final Random _random = Random();
 
@@ -62,6 +63,7 @@ class MainPageController extends _$MainPageController {
           failedAttempts: isCorrectAnswer
               ? currentCharacter.failedAttempts
               : currentCharacter.failedAttempts + 1,
+          totalAttempts: currentCharacter.totalAttempts + 1,
           isSucceed: isCorrectAnswer,
         );
 
@@ -93,6 +95,7 @@ class MainPageController extends _$MainPageController {
     for (final element in _characterInfo) {
       _characterInfo[_characterInfo.indexOf(element)] = element.copyWith(
         failedAttempts: 0,
+        totalAttempts: 0,
         isSucceed: false,
       );
     }
