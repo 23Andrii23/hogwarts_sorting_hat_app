@@ -17,6 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isGuessed = characterInfo.isSucceed;
+
     return RefreshIndicator(
       onRefresh: () async => onRefresh(),
       child: SingleChildScrollView(
@@ -73,38 +75,56 @@ class HomeScreen extends StatelessWidget {
                       HouseCard(
                         house: 'Gryffindor',
                         imagePath: 'assets/images/crests/gryffindor.jpg',
-                        onTap: () => onHouseSelected('Gryffindor'),
+                        onTap: isGuessed
+                            ? null
+                            : () => onHouseSelected('Gryffindor'),
+                        isDisabled: isGuessed,
                       ),
                       HouseCard(
                         house: 'Slytherin',
                         imagePath: 'assets/images/crests/slytherin.jpg',
-                        onTap: () => onHouseSelected('Slytherin'),
+                        onTap: isGuessed
+                            ? null
+                            : () => onHouseSelected('Slytherin'),
+                        isDisabled: isGuessed,
                       ),
                       HouseCard(
                         house: 'Ravenclaw',
                         imagePath: 'assets/images/crests/ravenclaw.jpg',
-                        onTap: () => onHouseSelected('Ravenclaw'),
+                        onTap: isGuessed
+                            ? null
+                            : () => onHouseSelected('Ravenclaw'),
+                        isDisabled: isGuessed,
                       ),
                       HouseCard(
                         house: 'Hufflepuff',
                         imagePath: 'assets/images/crests/hufflepuff.jpg',
-                        onTap: () => onHouseSelected('Hufflepuff'),
+                        onTap: isGuessed
+                            ? null
+                            : () => onHouseSelected('Hufflepuff'),
+                        isDisabled: isGuessed,
                       ),
                     ],
                   ),
                   const SizedBox(height: 15),
                   GestureDetector(
-                    onTap: () => onHouseSelected(null),
+                    onTap: isGuessed ? null : () => onHouseSelected(null),
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 24),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 2),
+                        border: Border.all(
+                          color: isGuessed ? Colors.grey : Colors.black,
+                          width: 2,
+                        ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Not in House',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: isGuessed ? Colors.grey : Colors.black,
+                          ),
                         ),
                       ),
                     ),

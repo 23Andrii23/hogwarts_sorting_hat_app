@@ -48,9 +48,54 @@ class MainPageController extends _$MainPageController {
     return randomItem;
   }
 
-  void checkAnswer(String? house) {
+  // void checkAnswer(String? house) {
+  //   state.whenData((value) {
+  //     final currentCharacter = value.characterInfo;
+  //     final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
+  //         (house == currentCharacter.house);
+  //
+  //     final characterIndex =
+  //         _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
+  //     if (characterIndex != -1) {
+  //       final wasSuccessfulBefore = _characterInfo[characterIndex].isSucceed;
+  //
+  //       _characterInfo[characterIndex] = currentCharacter.copyWith(
+  //         failedAttempts: isCorrectAnswer
+  //             ? currentCharacter.failedAttempts
+  //             : currentCharacter.failedAttempts + 1,
+  //         totalAttempts: currentCharacter.totalAttempts + 1,
+  //         isSucceed: isCorrectAnswer,
+  //       );
+  //
+  //       state = AsyncData(
+  //         value.copyWith(
+  //           characterInfo: _characterInfo[characterIndex],
+  //           totalAttempts: value.totalAttempts + 1,
+  //           successAttempts: (isCorrectAnswer && !wasSuccessfulBefore)
+  //               ? value.successAttempts + 1
+  //               : value.successAttempts,
+  //           failedAttempts: isCorrectAnswer
+  //               ? value.failedAttempts
+  //               : value.failedAttempts + 1,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
+
+  // MainPageController
+  bool checkAnswer(String? house) {
+    bool isCorrectGuess = false;
+
     state.whenData((value) {
       final currentCharacter = value.characterInfo;
+
+      // Якщо вже вгадано, просто повертаємо true
+      if (currentCharacter.isSucceed) {
+        isCorrectGuess = true;
+        return;
+      }
+
       final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
           (house == currentCharacter.house);
 
@@ -79,8 +124,12 @@ class MainPageController extends _$MainPageController {
                 : value.failedAttempts + 1,
           ),
         );
+
+        isCorrectGuess = isCorrectAnswer;
       }
     });
+
+    return isCorrectGuess;
   }
 
   void pullToRefresh() {

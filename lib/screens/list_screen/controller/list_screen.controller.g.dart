@@ -7,7 +7,7 @@ part of 'list_screen.controller.dart';
 // **************************************************************************
 
 String _$listScreenControllerHash() =>
-    r'c19816d1ddb1bf3afe86ef41b0cfa5b795ddc816';
+    r'5f8492cacfe1c6508b1f454838eec57d2e49c8a3';
 
 /// See also [ListScreenController].
 @ProviderFor(ListScreenController)
