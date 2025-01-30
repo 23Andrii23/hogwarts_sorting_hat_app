@@ -55,25 +55,28 @@ class MainPageController extends _$MainPageController {
       final characterIndex =
           _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
       if (characterIndex != -1) {
+        final wasSuccessfulBefore = _characterInfo[characterIndex].isSucceed;
+
         _characterInfo[characterIndex] = currentCharacter.copyWith(
           failedAttempts: isCorrectAnswer
               ? currentCharacter.failedAttempts
               : currentCharacter.failedAttempts + 1,
           isSucceed: isCorrectAnswer,
         );
-      }
 
-      state = AsyncData(
-        value.copyWith(
-          characterInfo: _characterInfo[characterIndex],
-          totalAttempts: value.totalAttempts + 1,
-          successAttempts: isCorrectAnswer
-              ? value.successAttempts + 1
-              : value.successAttempts,
-          failedAttempts:
-              isCorrectAnswer ? value.failedAttempts : value.failedAttempts + 1,
-        ),
-      );
+        state = AsyncData(
+          value.copyWith(
+            characterInfo: _characterInfo[characterIndex],
+            totalAttempts: value.totalAttempts + 1,
+            successAttempts: (isCorrectAnswer && !wasSuccessfulBefore)
+                ? value.successAttempts + 1
+                : value.successAttempts,
+            failedAttempts: isCorrectAnswer
+                ? value.failedAttempts
+                : value.failedAttempts + 1,
+          ),
+        );
+      }
     });
   }
 
