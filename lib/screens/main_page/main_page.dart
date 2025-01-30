@@ -39,49 +39,42 @@ class _MainPageState extends ConsumerState<MainPage> {
             ),
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: () async =>
-              ref.read(mainPageControllerProvider.notifier).pullToRefresh(),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Container(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height -
-                    AppBar().preferredSize.height -
-                    MediaQuery.of(context).padding.top -
-                    kBottomNavigationBarHeight,
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: StatsCard(
-                            count: state.totalAttempts,
-                            title: 'Total',
-                          ),
-                        ),
-                        Expanded(
-                          child: StatsCard(
-                            count: state.successAttempts,
-                            title: 'Success',
-                          ),
-                        ),
-                        Expanded(
-                          child: StatsCard(
-                            count: state.failedAttempts,
-                            title: 'Failed',
-                          ),
-                        ),
-                      ],
+        body: Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height -
+                AppBar().preferredSize.height -
+                MediaQuery.of(context).padding.top -
+                kBottomNavigationBarHeight,
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: StatsCard(
+                        count: state.totalAttempts,
+                        title: 'Total',
+                      ),
                     ),
-                  ),
-                  _bodyWidget(state.characterInfo)[_selectedIndex],
-                ],
+                    Expanded(
+                      child: StatsCard(
+                        count: state.successAttempts,
+                        title: 'Success',
+                      ),
+                    ),
+                    Expanded(
+                      child: StatsCard(
+                        count: state.failedAttempts,
+                        title: 'Failed',
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              _bodyWidget(state.characterInfo)[_selectedIndex],
+            ],
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -108,7 +101,14 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   List<Widget> _bodyWidget(CharacterInfo character) {
     return [
-      HomeScreen(characterInfo: character),
+      HomeScreen(
+        characterInfo: character,
+        onHouseSelected: (house) {
+          ref.read(mainPageControllerProvider.notifier).checkAnswer(house);
+        },
+        onRefresh: () =>
+            ref.read(mainPageControllerProvider.notifier).pullToRefresh(),
+      ),
       const ListScreen(),
     ];
   }

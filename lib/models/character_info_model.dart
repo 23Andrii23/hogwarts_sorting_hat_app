@@ -15,6 +15,8 @@ class CharacterInfo with _$CharacterInfo {
     required String? dateOfBirth,
     required String? actor,
     required String? patronus,
+    @Default(0) int failedAttempts,
+    @Default(false) bool isSucceed,
   }) = _CharacterInfo;
 
   factory CharacterInfo.fromJson(Map<String, dynamic> json) =>

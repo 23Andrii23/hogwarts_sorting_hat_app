@@ -21,6 +21,7 @@ class MainPageState with _$MainPageState {
 class MainPageController extends _$MainPageController {
   final MainInfo _mainInfo = MainInfo();
   final List<CharacterInfo> _characterInfo = [];
+  List<CharacterInfo> get characterInfo => _characterInfo;
   final Random _random = Random();
 
   @override
@@ -45,19 +46,36 @@ class MainPageController extends _$MainPageController {
     return randomItem;
   }
 
-  void checkAnswer(String house) {
+  void checkAnswer(String? house) {
     state.whenData((value) {
-      if (house == value.characterInfo.house) {
-        state = AsyncData(value.copyWith(
-          characterInfo: getRandCharacter(),
-          totalAttempts: value.totalAttempts + 1,
-          successAttempts: value.successAttempts + 1,
-        ));
-      } else {
-        state = AsyncData(value.copyWith(
-          totalAttempts: value.totalAttempts + 1,
-          failedAttempts: value.failedAttempts + 1,
-        ));
+      final currentCharacter = value.characterInfo;
+      final isCorrectAnswer = (house == null && currentCharacter.house == '') ||
+          (house == currentCharacter.house);
+
+      final characterIndex =
+          _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
+      if (characterIndex != -1) {
+        final wasSuccessfulBefore = _characterInfo[characterIndex].isSucceed;
+
+        _characterInfo[characterIndex] = currentCharacter.copyWith(
+          failedAttempts: isCorrectAnswer
+              ? currentCharacter.failedAttempts
+              : currentCharacter.failedAttempts + 1,
+          isSucceed: isCorrectAnswer,
+        );
+
+        state = AsyncData(
+          value.copyWith(
+            characterInfo: _characterInfo[characterIndex],
+            totalAttempts: value.totalAttempts + 1,
+            successAttempts: (isCorrectAnswer && !wasSuccessfulBefore)
+                ? value.successAttempts + 1
+                : value.successAttempts,
+            failedAttempts: isCorrectAnswer
+                ? value.failedAttempts
+                : value.failedAttempts + 1,
+          ),
+        );
       }
     });
   }
@@ -71,6 +89,13 @@ class MainPageController extends _$MainPageController {
   }
 
   void reset() {
+    for (final element in _characterInfo) {
+      _characterInfo[_characterInfo.indexOf(element)] = element.copyWith(
+        failedAttempts: 0,
+        isSucceed: false,
+      );
+    }
+
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),

@@ -28,6 +28,8 @@ mixin _$CharacterInfo {
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get actor => throw _privateConstructorUsedError;
   String? get patronus => throw _privateConstructorUsedError;
+  int get failedAttempts => throw _privateConstructorUsedError;
+  bool get isSucceed => throw _privateConstructorUsedError;
 
   /// Serializes this CharacterInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +55,9 @@ abstract class $CharacterInfoCopyWith<$Res> {
       String? species,
       String? dateOfBirth,
       String? actor,
-      String? patronus});
+      String? patronus,
+      int failedAttempts,
+      bool isSucceed});
 }
 
 /// @nodoc
@@ -79,6 +83,8 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
     Object? dateOfBirth = freezed,
     Object? actor = freezed,
     Object? patronus = freezed,
+    Object? failedAttempts = null,
+    Object? isSucceed = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -113,6 +119,14 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
           ? _value.patronus
           : patronus // ignore: cast_nullable_to_non_nullable
               as String?,
+      failedAttempts: null == failedAttempts
+          ? _value.failedAttempts
+          : failedAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSucceed: null == isSucceed
+          ? _value.isSucceed
+          : isSucceed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -133,7 +147,9 @@ abstract class _$$CharacterInfoImplCopyWith<$Res>
       String? species,
       String? dateOfBirth,
       String? actor,
-      String? patronus});
+      String? patronus,
+      int failedAttempts,
+      bool isSucceed});
 }
 
 /// @nodoc
@@ -157,6 +173,8 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
     Object? dateOfBirth = freezed,
     Object? actor = freezed,
     Object? patronus = freezed,
+    Object? failedAttempts = null,
+    Object? isSucceed = null,
   }) {
     return _then(_$CharacterInfoImpl(
       id: null == id
@@ -191,6 +209,14 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
           ? _value.patronus
           : patronus // ignore: cast_nullable_to_non_nullable
               as String?,
+      failedAttempts: null == failedAttempts
+          ? _value.failedAttempts
+          : failedAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSucceed: null == isSucceed
+          ? _value.isSucceed
+          : isSucceed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -206,7 +232,9 @@ class _$CharacterInfoImpl implements _CharacterInfo {
       required this.species,
       required this.dateOfBirth,
       required this.actor,
-      required this.patronus});
+      required this.patronus,
+      this.failedAttempts = 0,
+      this.isSucceed = false});
 
   factory _$CharacterInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CharacterInfoImplFromJson(json);
@@ -227,10 +255,16 @@ class _$CharacterInfoImpl implements _CharacterInfo {
   final String? actor;
   @override
   final String? patronus;
+  @override
+  @JsonKey()
+  final int failedAttempts;
+  @override
+  @JsonKey()
+  final bool isSucceed;
 
   @override
   String toString() {
-    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus)';
+    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus, failedAttempts: $failedAttempts, isSucceed: $isSucceed)';
   }
 
   @override
@@ -247,13 +281,17 @@ class _$CharacterInfoImpl implements _CharacterInfo {
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.actor, actor) || other.actor == actor) &&
             (identical(other.patronus, patronus) ||
-                other.patronus == patronus));
+                other.patronus == patronus) &&
+            (identical(other.failedAttempts, failedAttempts) ||
+                other.failedAttempts == failedAttempts) &&
+            (identical(other.isSucceed, isSucceed) ||
+                other.isSucceed == isSucceed));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, house, image, species,
-      dateOfBirth, actor, patronus);
+      dateOfBirth, actor, patronus, failedAttempts, isSucceed);
 
   /// Create a copy of CharacterInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -280,7 +318,9 @@ abstract class _CharacterInfo implements CharacterInfo {
       required final String? species,
       required final String? dateOfBirth,
       required final String? actor,
-      required final String? patronus}) = _$CharacterInfoImpl;
+      required final String? patronus,
+      final int failedAttempts,
+      final bool isSucceed}) = _$CharacterInfoImpl;
 
   factory _CharacterInfo.fromJson(Map<String, dynamic> json) =
       _$CharacterInfoImpl.fromJson;
@@ -301,6 +341,10 @@ abstract class _CharacterInfo implements CharacterInfo {
   String? get actor;
   @override
   String? get patronus;
+  @override
+  int get failedAttempts;
+  @override
+  bool get isSucceed;
 
   /// Create a copy of CharacterInfo
   /// with the given fields replaced by the non-null parameter values.

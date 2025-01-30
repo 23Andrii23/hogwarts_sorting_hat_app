@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_page.controller.dart';
+part of 'list_page.controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mainPageControllerHash() =>
-    r'7b353ba84efd7e39510311595ddcd656e3b04b28';
+String _$listPageControllerHash() =>
+    r'51e35acf8f716c5b383c12abf40590738ddbac11';
 
-/// See also [MainPageController].
-@ProviderFor(MainPageController)
-final mainPageControllerProvider = AutoDisposeAsyncNotifierProvider<
-    MainPageController, MainPageState>.internal(
-  MainPageController.new,
-  name: r'mainPageControllerProvider',
+/// See also [ListPageController].
+@ProviderFor(ListPageController)
+final listPageControllerProvider = AutoDisposeAsyncNotifierProvider<
+    ListPageController, List<CharacterInfo>>.internal(
+  ListPageController.new,
+  name: r'listPageControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$mainPageControllerHash,
+      : _$listPageControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$MainPageController = AutoDisposeAsyncNotifier<MainPageState>;
+typedef _$ListPageController = AutoDisposeAsyncNotifier<List<CharacterInfo>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

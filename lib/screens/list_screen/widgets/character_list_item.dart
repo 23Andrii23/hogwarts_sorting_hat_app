@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hogwarts/screens/details_screen/character_details_screen.dart';
 
@@ -27,14 +28,12 @@ class CharacterListItem extends StatelessWidget {
             ),
           );
         },
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Image.network(
-            imageUrl,
-            width: 40,
-            height: 50,
-            fit: BoxFit.cover,
-          ),
+        leading: CachedNetworkImage(
+          imageUrl: imageUrl,
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+          width: 40,
+          height: 50,
+          fit: BoxFit.cover,
         ),
         title: Text(
           name,
