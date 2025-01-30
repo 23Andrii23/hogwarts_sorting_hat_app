@@ -1,4 +1,4 @@
-import 'package:hogwarts/models/character_info_model.dart';
+import 'package:hogwarts/models/character_info.model.dart';
 import 'package:hogwarts/screens/main_page/controller/main_page.controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

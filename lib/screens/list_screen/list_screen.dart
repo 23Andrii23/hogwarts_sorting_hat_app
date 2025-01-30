@@ -25,12 +25,7 @@ class ListScreen extends ConsumerWidget {
               )
             else
               ...characters.map(
-                (character) => CharacterListItem(
-                  name: character.name ?? '',
-                  attempts: character.failedAttempts,
-                  imageUrl: character.image ?? '',
-                  isSuccess: character.isSucceed,
-                ),
+                (character) => CharacterListItem(character: character),
               ),
           ],
         );

@@ -28,10 +28,6 @@ class HouseCard extends StatelessWidget {
               width: 32,
               height: 32,
             ),
-            // Text(
-            //   icon,
-            //   style: const TextStyle(fontSize: 32),
-            // ),
             Text(
               house,
               style: const TextStyle(fontSize: 16),

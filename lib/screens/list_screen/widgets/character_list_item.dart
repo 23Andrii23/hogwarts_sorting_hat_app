@@ -1,19 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hogwarts/screens/details_screen/character_details_screen.dart';
+import 'package:hogwarts/models/character_info.model.dart';
+import 'package:hogwarts/screens/character_details_screen/character_details_screen.dart';
 
 class CharacterListItem extends StatelessWidget {
-  final String name;
-  final int attempts;
-  final String imageUrl;
-  final bool isSuccess;
+  final CharacterInfo character;
 
   const CharacterListItem({
+    required this.character,
     super.key,
-    required this.name,
-    required this.attempts,
-    required this.imageUrl,
-    required this.isSuccess,
   });
 
   @override
@@ -24,26 +19,29 @@ class CharacterListItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => CharacterDetailsScreen(name: name),
+              builder: (context) => CharacterDetailsScreen(
+                characterId: character.id,
+                showInfo: character.isSucceed,
+              ),
             ),
           );
         },
         leading: CachedNetworkImage(
-          imageUrl: imageUrl,
+          imageUrl: character.image ?? '',
           errorWidget: (context, url, error) => const Icon(Icons.error),
           width: 40,
           height: 50,
           fit: BoxFit.cover,
         ),
         title: Text(
-          name,
+          character.name ?? '',
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
-          'Attempts: $attempts',
+          'Attempts: ${character.failedAttempts}',
           style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,
@@ -52,14 +50,14 @@ class CharacterListItem extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (!isSuccess)
+            if (!character.isSucceed)
               IconButton(
                 icon: const Icon(Icons.refresh),
                 onPressed: () {},
               ),
             Icon(
-              isSuccess ? Icons.check_circle : Icons.cancel,
-              color: isSuccess ? Colors.green : Colors.red,
+              character.isSucceed ? Icons.check_circle : Icons.cancel,
+              color: character.isSucceed ? Colors.green : Colors.red,
               size: 32,
             ),
           ],
