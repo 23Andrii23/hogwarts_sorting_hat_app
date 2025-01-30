@@ -7,7 +7,7 @@ part of 'character_details_screen.controller.dart';
 // **************************************************************************
 
 String _$characterDetailsScreenControllerHash() =>
-    r'cc2247081ee8a3053e7c66ed7d0e57f2a4eeae2c';
+    r'7532420154efda5ad7304daad8e3bee94689cbf4';
 
 /// Copied from Dart SDK
 class _SystemHash {

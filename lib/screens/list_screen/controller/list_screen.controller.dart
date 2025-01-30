@@ -21,6 +21,7 @@ class ListScreenController extends _$ListScreenController {
             .toList();
         _charactersInfo.clear();
         _charactersInfo.addAll(_filteredList);
+
         return _filteredList;
       },
       loading: () => [],
