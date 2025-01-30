@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hogwarts/screens/list_screen/controller/list_page.controller.dart';
+import 'package:hogwarts/screens/list_screen/controller/list_screen.controller.dart';
 import 'package:hogwarts/screens/list_screen/widgets/character_list_item.dart';
 import 'package:hogwarts/screens/list_screen/widgets/search_field.dart';
 
@@ -9,7 +9,8 @@ class ListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listState = ref.watch(listPageControllerProvider);
+    final listState = ref.watch(listScreenControllerProvider);
+    final notifier = ref.read(listScreenControllerProvider.notifier);
 
     return listState.when(
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -17,7 +18,10 @@ class ListScreen extends ConsumerWidget {
       data: (characters) {
         return Column(
           children: [
-            const SearchField(),
+            SearchField(
+              onChanged: notifier.searchCharacter,
+              onClear: notifier.resetSearch,
+            ),
             const SizedBox(height: 10),
             if (characters.isEmpty)
               const Center(
