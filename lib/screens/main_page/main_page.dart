@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hogwarts/models/character_info_model.dart';
+import 'package:hogwarts/models/character_info.model.dart';
 import 'package:hogwarts/screens/home_screen/home_screen.dart';
 import 'package:hogwarts/screens/list_screen/list_screen.dart';
 import 'package:hogwarts/screens/main_page/controller/main_page.controller.dart';
@@ -25,7 +25,10 @@ class _MainPageState extends ConsumerState<MainPage> {
       error: (error, _) => Center(child: Text(error.toString())),
       data: (state) => Scaffold(
         appBar: AppBar(
-          title: Text(_selectedIndex == 0 ? 'Home Screen' : 'List Screen'),
+          title: Text(
+            _selectedIndex == 0 ? 'Home Screen' : 'List Screen',
+            style: const TextStyle(color: Colors.white),
+          ),
           backgroundColor: Colors.blue,
           actions: [
             TextButton(

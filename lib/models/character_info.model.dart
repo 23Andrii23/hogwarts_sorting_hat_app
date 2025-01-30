@@ -1,8 +1,8 @@
-// character_info_model.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hogwarts/models/wand.model.dart';
 
-part 'character_info_model.freezed.dart';
-part 'character_info_model.g.dart';
+part 'character_info.model.freezed.dart';
+part 'character_info.model.g.dart';
 
 @freezed
 class CharacterInfo with _$CharacterInfo {
@@ -15,6 +15,10 @@ class CharacterInfo with _$CharacterInfo {
     required String? dateOfBirth,
     required String? actor,
     required String? patronus,
+    required WandModel? wand,
+    required String? ancestry,
+    required String? eyeColour,
+    required String? hairColour,
     @Default(0) int failedAttempts,
     @Default(false) bool isSucceed,
   }) = _CharacterInfo;

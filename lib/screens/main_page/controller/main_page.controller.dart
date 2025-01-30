@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hogwarts/models/character_info_model.dart';
+import 'package:hogwarts/models/character_info.model.dart';
 import 'package:hogwarts/service/main_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'dart:math';
@@ -29,7 +29,8 @@ class MainPageController extends _$MainPageController {
     await init();
 
     return MainPageState(
-      characterInfo: getRandCharacter(),
+      // characterInfo: getRandCharacter(),
+      characterInfo: _characterInfo[0],
       totalAttempts: 0,
       successAttempts: 0,
       failedAttempts: 0,

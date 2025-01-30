@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'character_info_model.dart';
+part of 'character_info.model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -28,6 +28,10 @@ mixin _$CharacterInfo {
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get actor => throw _privateConstructorUsedError;
   String? get patronus => throw _privateConstructorUsedError;
+  WandModel? get wand => throw _privateConstructorUsedError;
+  String? get ancestry => throw _privateConstructorUsedError;
+  String? get eyeColour => throw _privateConstructorUsedError;
+  String? get hairColour => throw _privateConstructorUsedError;
   int get failedAttempts => throw _privateConstructorUsedError;
   bool get isSucceed => throw _privateConstructorUsedError;
 
@@ -56,8 +60,14 @@ abstract class $CharacterInfoCopyWith<$Res> {
       String? dateOfBirth,
       String? actor,
       String? patronus,
+      WandModel? wand,
+      String? ancestry,
+      String? eyeColour,
+      String? hairColour,
       int failedAttempts,
       bool isSucceed});
+
+  $WandModelCopyWith<$Res>? get wand;
 }
 
 /// @nodoc
@@ -83,6 +93,10 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
     Object? dateOfBirth = freezed,
     Object? actor = freezed,
     Object? patronus = freezed,
+    Object? wand = freezed,
+    Object? ancestry = freezed,
+    Object? eyeColour = freezed,
+    Object? hairColour = freezed,
     Object? failedAttempts = null,
     Object? isSucceed = null,
   }) {
@@ -119,6 +133,22 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
           ? _value.patronus
           : patronus // ignore: cast_nullable_to_non_nullable
               as String?,
+      wand: freezed == wand
+          ? _value.wand
+          : wand // ignore: cast_nullable_to_non_nullable
+              as WandModel?,
+      ancestry: freezed == ancestry
+          ? _value.ancestry
+          : ancestry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      eyeColour: freezed == eyeColour
+          ? _value.eyeColour
+          : eyeColour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hairColour: freezed == hairColour
+          ? _value.hairColour
+          : hairColour // ignore: cast_nullable_to_non_nullable
+              as String?,
       failedAttempts: null == failedAttempts
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
@@ -128,6 +158,20 @@ class _$CharacterInfoCopyWithImpl<$Res, $Val extends CharacterInfo>
           : isSucceed // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
+  }
+
+  /// Create a copy of CharacterInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WandModelCopyWith<$Res>? get wand {
+    if (_value.wand == null) {
+      return null;
+    }
+
+    return $WandModelCopyWith<$Res>(_value.wand!, (value) {
+      return _then(_value.copyWith(wand: value) as $Val);
+    });
   }
 }
 
@@ -148,8 +192,15 @@ abstract class _$$CharacterInfoImplCopyWith<$Res>
       String? dateOfBirth,
       String? actor,
       String? patronus,
+      WandModel? wand,
+      String? ancestry,
+      String? eyeColour,
+      String? hairColour,
       int failedAttempts,
       bool isSucceed});
+
+  @override
+  $WandModelCopyWith<$Res>? get wand;
 }
 
 /// @nodoc
@@ -173,6 +224,10 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
     Object? dateOfBirth = freezed,
     Object? actor = freezed,
     Object? patronus = freezed,
+    Object? wand = freezed,
+    Object? ancestry = freezed,
+    Object? eyeColour = freezed,
+    Object? hairColour = freezed,
     Object? failedAttempts = null,
     Object? isSucceed = null,
   }) {
@@ -209,6 +264,22 @@ class __$$CharacterInfoImplCopyWithImpl<$Res>
           ? _value.patronus
           : patronus // ignore: cast_nullable_to_non_nullable
               as String?,
+      wand: freezed == wand
+          ? _value.wand
+          : wand // ignore: cast_nullable_to_non_nullable
+              as WandModel?,
+      ancestry: freezed == ancestry
+          ? _value.ancestry
+          : ancestry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      eyeColour: freezed == eyeColour
+          ? _value.eyeColour
+          : eyeColour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hairColour: freezed == hairColour
+          ? _value.hairColour
+          : hairColour // ignore: cast_nullable_to_non_nullable
+              as String?,
       failedAttempts: null == failedAttempts
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
@@ -233,6 +304,10 @@ class _$CharacterInfoImpl implements _CharacterInfo {
       required this.dateOfBirth,
       required this.actor,
       required this.patronus,
+      required this.wand,
+      required this.ancestry,
+      required this.eyeColour,
+      required this.hairColour,
       this.failedAttempts = 0,
       this.isSucceed = false});
 
@@ -256,6 +331,14 @@ class _$CharacterInfoImpl implements _CharacterInfo {
   @override
   final String? patronus;
   @override
+  final WandModel? wand;
+  @override
+  final String? ancestry;
+  @override
+  final String? eyeColour;
+  @override
+  final String? hairColour;
+  @override
   @JsonKey()
   final int failedAttempts;
   @override
@@ -264,7 +347,7 @@ class _$CharacterInfoImpl implements _CharacterInfo {
 
   @override
   String toString() {
-    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus, failedAttempts: $failedAttempts, isSucceed: $isSucceed)';
+    return 'CharacterInfo(id: $id, name: $name, house: $house, image: $image, species: $species, dateOfBirth: $dateOfBirth, actor: $actor, patronus: $patronus, wand: $wand, ancestry: $ancestry, eyeColour: $eyeColour, hairColour: $hairColour, failedAttempts: $failedAttempts, isSucceed: $isSucceed)';
   }
 
   @override
@@ -282,6 +365,13 @@ class _$CharacterInfoImpl implements _CharacterInfo {
             (identical(other.actor, actor) || other.actor == actor) &&
             (identical(other.patronus, patronus) ||
                 other.patronus == patronus) &&
+            (identical(other.wand, wand) || other.wand == wand) &&
+            (identical(other.ancestry, ancestry) ||
+                other.ancestry == ancestry) &&
+            (identical(other.eyeColour, eyeColour) ||
+                other.eyeColour == eyeColour) &&
+            (identical(other.hairColour, hairColour) ||
+                other.hairColour == hairColour) &&
             (identical(other.failedAttempts, failedAttempts) ||
                 other.failedAttempts == failedAttempts) &&
             (identical(other.isSucceed, isSucceed) ||
@@ -290,8 +380,22 @@ class _$CharacterInfoImpl implements _CharacterInfo {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, house, image, species,
-      dateOfBirth, actor, patronus, failedAttempts, isSucceed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      house,
+      image,
+      species,
+      dateOfBirth,
+      actor,
+      patronus,
+      wand,
+      ancestry,
+      eyeColour,
+      hairColour,
+      failedAttempts,
+      isSucceed);
 
   /// Create a copy of CharacterInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -319,6 +423,10 @@ abstract class _CharacterInfo implements CharacterInfo {
       required final String? dateOfBirth,
       required final String? actor,
       required final String? patronus,
+      required final WandModel? wand,
+      required final String? ancestry,
+      required final String? eyeColour,
+      required final String? hairColour,
       final int failedAttempts,
       final bool isSucceed}) = _$CharacterInfoImpl;
 
@@ -341,6 +449,14 @@ abstract class _CharacterInfo implements CharacterInfo {
   String? get actor;
   @override
   String? get patronus;
+  @override
+  WandModel? get wand;
+  @override
+  String? get ancestry;
+  @override
+  String? get eyeColour;
+  @override
+  String? get hairColour;
   @override
   int get failedAttempts;
   @override

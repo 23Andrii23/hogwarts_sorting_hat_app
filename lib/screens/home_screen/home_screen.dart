@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hogwarts/models/character_info_model.dart';
+import 'package:hogwarts/models/character_info.model.dart';
 import 'package:hogwarts/screens/home_screen/widgets/house_card.dart';
 
 class HomeScreen extends StatelessWidget {
