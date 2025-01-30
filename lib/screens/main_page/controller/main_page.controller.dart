@@ -20,10 +20,10 @@ class MainPageState with _$MainPageState {
 @riverpod
 class MainPageController extends _$MainPageController {
   final _httpService = HttpService();
-  final List<CharacterInfo> _characterInfo = [];
+  final _characterInfo = <CharacterInfo>[];
 
   List<CharacterInfo> get characterInfo => _characterInfo;
-  final Random _random = Random();
+  final _random = Random();
 
   @override
   FutureOr<MainPageState> build() async {
@@ -43,7 +43,7 @@ class MainPageController extends _$MainPageController {
   }
 
   CharacterInfo getRandCharacter() {
-    var randomItem = _characterInfo[_random.nextInt(_characterInfo.length)];
+    final randomItem = _characterInfo[_random.nextInt(_characterInfo.length)];
     return randomItem;
   }
 

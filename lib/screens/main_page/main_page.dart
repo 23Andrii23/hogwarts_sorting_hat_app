@@ -14,7 +14,7 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  int _selectedIndex = 0;
+  var _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {

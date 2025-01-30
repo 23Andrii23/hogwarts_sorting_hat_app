@@ -6,8 +6,7 @@ part 'list_screen.controller.g.dart';
 
 @riverpod
 class ListScreenController extends _$ListScreenController {
-  final List<CharacterInfo> _charactersInfo = [];
-  List<CharacterInfo> _filteredList = [];
+  final _filteredList = <CharacterInfo>[];
 
   @override
   FutureOr<List<CharacterInfo>> build() {
@@ -16,11 +15,9 @@ class ListScreenController extends _$ListScreenController {
     return mainState.when(
       data: (state) {
         final mainController = ref.read(mainPageControllerProvider.notifier);
-        _filteredList = mainController.characterInfo
+        _filteredList.addAll(mainController.characterInfo
             .where((element) => element.isSucceed || element.failedAttempts > 0)
-            .toList();
-        _charactersInfo.clear();
-        _charactersInfo.addAll(_filteredList);
+            .toList());
         return _filteredList;
       },
       loading: () => [],
