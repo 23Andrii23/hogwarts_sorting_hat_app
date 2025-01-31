@@ -12,7 +12,7 @@ A Flutter app for guessing Hogwarts houses of Harry Potter characters with dynam
 - [x] State persistence across game sessions
 
 ## Demo
-[Add a GIF/video demonstrating the game]
+![Demo](demo.gif)
 
 ## App Architecture
 
