@@ -20,7 +20,7 @@ mixin _$MainPageState {
   int get totalAttempts => throw _privateConstructorUsedError;
   int get successAttempts => throw _privateConstructorUsedError;
   int get failedAttempts => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  Map<String, String> get characterImages => throw _privateConstructorUsedError;
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +40,7 @@ abstract class $MainPageStateCopyWith<$Res> {
       int totalAttempts,
       int successAttempts,
       int failedAttempts,
-      String? imageUrl});
+      Map<String, String> characterImages});
 
   $CharacterInfoCopyWith<$Res> get characterInfo;
 }
@@ -64,7 +64,7 @@ class _$MainPageStateCopyWithImpl<$Res, $Val extends MainPageState>
     Object? totalAttempts = null,
     Object? successAttempts = null,
     Object? failedAttempts = null,
-    Object? imageUrl = freezed,
+    Object? characterImages = null,
   }) {
     return _then(_value.copyWith(
       characterInfo: null == characterInfo
@@ -83,10 +83,10 @@ class _$MainPageStateCopyWithImpl<$Res, $Val extends MainPageState>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      characterImages: null == characterImages
+          ? _value.characterImages
+          : characterImages // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ) as $Val);
   }
 
@@ -114,7 +114,7 @@ abstract class _$$MainPageStateImplCopyWith<$Res>
       int totalAttempts,
       int successAttempts,
       int failedAttempts,
-      String? imageUrl});
+      Map<String, String> characterImages});
 
   @override
   $CharacterInfoCopyWith<$Res> get characterInfo;
@@ -137,7 +137,7 @@ class __$$MainPageStateImplCopyWithImpl<$Res>
     Object? totalAttempts = null,
     Object? successAttempts = null,
     Object? failedAttempts = null,
-    Object? imageUrl = freezed,
+    Object? characterImages = null,
   }) {
     return _then(_$MainPageStateImpl(
       characterInfo: null == characterInfo
@@ -156,10 +156,10 @@ class __$$MainPageStateImplCopyWithImpl<$Res>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      characterImages: null == characterImages
+          ? _value._characterImages
+          : characterImages // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ));
   }
 }
@@ -174,7 +174,8 @@ class _$MainPageStateImpl
       required this.totalAttempts,
       required this.successAttempts,
       required this.failedAttempts,
-      this.imageUrl});
+      required final Map<String, String> characterImages})
+      : _characterImages = characterImages;
 
   @override
   final CharacterInfo characterInfo;
@@ -184,12 +185,17 @@ class _$MainPageStateImpl
   final int successAttempts;
   @override
   final int failedAttempts;
+  final Map<String, String> _characterImages;
   @override
-  final String? imageUrl;
+  Map<String, String> get characterImages {
+    if (_characterImages is EqualUnmodifiableMapView) return _characterImages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_characterImages);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainPageState(characterInfo: $characterInfo, totalAttempts: $totalAttempts, successAttempts: $successAttempts, failedAttempts: $failedAttempts, imageUrl: $imageUrl)';
+    return 'MainPageState(characterInfo: $characterInfo, totalAttempts: $totalAttempts, successAttempts: $successAttempts, failedAttempts: $failedAttempts, characterImages: $characterImages)';
   }
 
   @override
@@ -201,7 +207,7 @@ class _$MainPageStateImpl
       ..add(DiagnosticsProperty('totalAttempts', totalAttempts))
       ..add(DiagnosticsProperty('successAttempts', successAttempts))
       ..add(DiagnosticsProperty('failedAttempts', failedAttempts))
-      ..add(DiagnosticsProperty('imageUrl', imageUrl));
+      ..add(DiagnosticsProperty('characterImages', characterImages));
   }
 
   @override
@@ -217,13 +223,18 @@ class _$MainPageStateImpl
                 other.successAttempts == successAttempts) &&
             (identical(other.failedAttempts, failedAttempts) ||
                 other.failedAttempts == failedAttempts) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+            const DeepCollectionEquality()
+                .equals(other._characterImages, _characterImages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, characterInfo, totalAttempts,
-      successAttempts, failedAttempts, imageUrl);
+  int get hashCode => Object.hash(
+      runtimeType,
+      characterInfo,
+      totalAttempts,
+      successAttempts,
+      failedAttempts,
+      const DeepCollectionEquality().hash(_characterImages));
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -236,11 +247,12 @@ class _$MainPageStateImpl
 
 abstract class _MainPageState implements MainPageState {
   const factory _MainPageState(
-      {required final CharacterInfo characterInfo,
-      required final int totalAttempts,
-      required final int successAttempts,
-      required final int failedAttempts,
-      final String? imageUrl}) = _$MainPageStateImpl;
+          {required final CharacterInfo characterInfo,
+          required final int totalAttempts,
+          required final int successAttempts,
+          required final int failedAttempts,
+          required final Map<String, String> characterImages}) =
+      _$MainPageStateImpl;
 
   @override
   CharacterInfo get characterInfo;
@@ -251,7 +263,7 @@ abstract class _MainPageState implements MainPageState {
   @override
   int get failedAttempts;
   @override
-  String? get imageUrl;
+  Map<String, String> get characterImages;
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.

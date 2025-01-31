@@ -15,7 +15,7 @@ class MainPageState with _$MainPageState {
     required int totalAttempts,
     required int successAttempts,
     required int failedAttempts,
-    String? imageUrl,
+    required Map<String, String> characterImages,
   }) = _MainPageState;
 }
 
@@ -37,7 +37,7 @@ class MainPageController extends _$MainPageController {
       totalAttempts: 0,
       successAttempts: 0,
       failedAttempts: 0,
-      imageUrl: character.image,
+      characterImages: {},
     );
   }
 
@@ -47,14 +47,20 @@ class MainPageController extends _$MainPageController {
   }
 
   Future<void> _loadCharacterImage(CharacterInfo character) async {
-    try {
-      final imageUrl =
-          await _httpService.getImageForCharacter(character.name ?? '');
-      state.whenData((value) {
-        state = AsyncData(value.copyWith(imageUrl: imageUrl));
-      });
-    } catch (e) {
-      debugPrint('Error loading image: $e');
+    if (character.image?.isEmpty ?? true) {
+      try {
+        final imageUrl =
+            await _httpService.getImageForCharacter(character.name ?? '');
+        state.whenData((currentState) {
+          final updatedImages =
+              Map<String, String>.from(currentState.characterImages);
+          updatedImages[character.id] = imageUrl;
+          state =
+              AsyncData(currentState.copyWith(characterImages: updatedImages));
+        });
+      } catch (e) {
+        debugPrint('Error loading image: $e');
+      }
     }
   }
 
@@ -93,14 +99,17 @@ class MainPageController extends _$MainPageController {
           _characterInfo.indexWhere((c) => c.id == currentCharacter.id);
       if (characterIndex != -1) {
         final wasSuccessfulBefore = _characterInfo[characterIndex].isSucceed;
-
-        _characterInfo[characterIndex] = currentCharacter.copyWith(
+        final updatedCharacter = currentCharacter.copyWith(
           failedAttempts: isCorrectAnswer
               ? currentCharacter.failedAttempts
               : currentCharacter.failedAttempts + 1,
           totalAttempts: currentCharacter.totalAttempts + 1,
           isSucceed: isCorrectAnswer,
         );
+
+        _characterInfo[characterIndex] = updatedCharacter;
+
+        _loadCharacterImage(updatedCharacter);
 
         state = AsyncData(
           value.copyWith(
@@ -122,7 +131,7 @@ class MainPageController extends _$MainPageController {
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),
-        imageUrl: null,
+        characterImages: {},
       ));
     });
   }
@@ -142,7 +151,7 @@ class MainPageController extends _$MainPageController {
         totalAttempts: 0,
         successAttempts: 0,
         failedAttempts: 0,
-        imageUrl: null,
+        characterImages: {},
       ));
     });
   }

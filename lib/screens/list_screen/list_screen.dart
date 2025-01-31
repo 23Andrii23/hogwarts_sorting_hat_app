@@ -5,7 +5,12 @@ import 'package:hogwarts/screens/list_screen/widgets/character_list_item.dart';
 import 'package:hogwarts/screens/list_screen/widgets/search_field.dart';
 
 class ListScreen extends ConsumerWidget {
-  const ListScreen({super.key});
+  final Map<String, String> characterImages;
+
+  const ListScreen({
+    required this.characterImages,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,6 +46,7 @@ class ListScreen extends ConsumerWidget {
                       return CharacterListItem(
                         character: character,
                         onRefresh: () => notifier.setCharacterInfo(character),
+                        imageUrl: characterImages[character.id],
                       );
                     },
                   ),

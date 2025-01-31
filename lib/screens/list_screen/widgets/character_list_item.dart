@@ -6,10 +6,12 @@ import 'package:hogwarts/screens/character_details_screen/character_details_scre
 class CharacterListItem extends StatelessWidget {
   final CharacterInfo character;
   final VoidCallback onRefresh;
+  final String? imageUrl;
 
   const CharacterListItem({
     required this.character,
     required this.onRefresh,
+    required this.imageUrl,
     super.key,
   });
 
@@ -24,12 +26,13 @@ class CharacterListItem extends StatelessWidget {
               builder: (context) => CharacterDetailsScreen(
                 characterId: character.id,
                 showInfo: character.isSucceed,
+                imageUrl: imageUrl,
               ),
             ),
           );
         },
         leading: CachedNetworkImage(
-          imageUrl: character.image ?? '',
+          imageUrl: imageUrl ?? '',
           errorWidget: (context, url, error) => const Icon(Icons.error),
           width: 40,
           height: 50,
