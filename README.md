@@ -42,6 +42,11 @@ The app uses Riverpod for state management with the following key components:
 - Async state handling for image loading
 - Persistent state across screen transitions
 
+## Image
+
+The app fetches character images dynamically using n8n as an automation tool to process and serve images via API. The workflow in n8n retrieves images from external sources and delivers optimized URLs to the app.
+![n8n Workflow](n8n_workflow.png)
+
 ## Getting Started
 
 1. Clone the repository
