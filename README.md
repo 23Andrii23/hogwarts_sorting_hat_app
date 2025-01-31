@@ -1,17 +1,66 @@
-# hogwarts
+# Harry Potter House Sorting Game
 
-A new Flutter project.
+A Flutter app for guessing Hogwarts houses of Harry Potter characters with dynamic image loading and progress tracking.
+
+## Features
+
+- [x] Character-based house guessing gameplay
+- [x] Dynamic character image loading
+- [x] Progress tracking with success/fail statistics
+- [x] List view of attempted characters
+- [x] Pull-to-refresh for new characters
+- [x] State persistence across game sessions
+
+## Demo
+[Add a GIF/video demonstrating the game]
+
+## App Architecture
+
+The app follows a clean architecture pattern with three main layers:
+
+### Data Layer
+- `HttpService` for handling API requests to fetch characters and images
+- Character data models with Freezed for immutability
+
+### Domain Layer
+- Game logic and state management using Riverpod
+- Character randomization and scoring system
+- Image loading and caching mechanisms
+
+### Presentation Layer
+- Main game screen with house selection
+- Character list screen showing attempt history
+- Statistics cards showing game progress
+- Responsive UI with loading states
+
+## State Management
+
+The app uses Riverpod for state management with the following key components:
+
+- `MainPageController` for overall game state
+- `ListScreenController` for attempted characters list
+- Async state handling for image loading
+- Persistent state across screen transitions
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+git clone https://github.com/23Andrii23/hogwarts-sorting-game.git
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Install dependencies
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# hogwartst_sorting_hat_app
+```bash
+flutter pub get
+```
+
+3. Run the app
+
+```bash
+flutter run
+```
+
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
