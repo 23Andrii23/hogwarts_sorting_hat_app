@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hogwarts/models/character_info.model.dart';
 import 'package:hogwarts/service/http_service.dart';
@@ -14,6 +15,7 @@ class MainPageState with _$MainPageState {
     required int totalAttempts,
     required int successAttempts,
     required int failedAttempts,
+    String? imageUrl,
   }) = _MainPageState;
 }
 
@@ -28,12 +30,14 @@ class MainPageController extends _$MainPageController {
   @override
   FutureOr<MainPageState> build() async {
     await init();
+    final character = getRandCharacter();
 
     return MainPageState(
-      characterInfo: getRandCharacter(),
+      characterInfo: character,
       totalAttempts: 0,
       successAttempts: 0,
       failedAttempts: 0,
+      imageUrl: character.image,
     );
   }
 
@@ -42,9 +46,35 @@ class MainPageController extends _$MainPageController {
     _characterInfo.addAll(characterInfo);
   }
 
+  Future<void> _loadCharacterImage(CharacterInfo character) async {
+    try {
+      final imageUrl =
+          await _httpService.getImageForCharacter(character.name ?? '');
+      state.whenData((value) {
+        state = AsyncData(value.copyWith(imageUrl: imageUrl));
+      });
+    } catch (e) {
+      debugPrint('Error loading image: $e');
+    }
+  }
+
   CharacterInfo getRandCharacter() {
     final randomItem = _characterInfo[_random.nextInt(_characterInfo.length)];
+    if (randomItem.image?.isEmpty ?? true) {
+      _loadCharacterImage(randomItem);
+    }
     return randomItem;
+  }
+
+  void setCharacterInfo(CharacterInfo characterInfo) {
+    state.whenData((value) {
+      state = AsyncData(value.copyWith(
+        characterInfo: characterInfo,
+        totalAttempts: value.totalAttempts,
+        successAttempts: value.successAttempts,
+        failedAttempts: value.failedAttempts,
+      ));
+    });
   }
 
   void checkAnswer(String? house) {
@@ -92,6 +122,7 @@ class MainPageController extends _$MainPageController {
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),
+        imageUrl: null,
       ));
     });
   }
@@ -111,17 +142,7 @@ class MainPageController extends _$MainPageController {
         totalAttempts: 0,
         successAttempts: 0,
         failedAttempts: 0,
-      ));
-    });
-  }
-
-  void setCharacterInfo(CharacterInfo characterInfo) {
-    state.whenData((value) {
-      state = AsyncData(value.copyWith(
-        characterInfo: characterInfo,
-        totalAttempts: value.totalAttempts,
-        successAttempts: value.successAttempts,
-        failedAttempts: value.failedAttempts,
+        imageUrl: null,
       ));
     });
   }
