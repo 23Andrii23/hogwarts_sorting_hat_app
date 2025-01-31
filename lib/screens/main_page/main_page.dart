@@ -32,9 +32,7 @@ class _MainPageState extends ConsumerState<MainPage> {
           backgroundColor: Colors.blue,
           actions: [
             TextButton(
-              onPressed: () {
-                ref.read(mainPageControllerProvider.notifier).reset();
-              },
+              onPressed: ref.read(mainPageControllerProvider.notifier).reset,
               child: const Text(
                 'Reset',
                 style: TextStyle(color: Colors.white),
@@ -76,7 +74,10 @@ class _MainPageState extends ConsumerState<MainPage> {
                   ],
                 ),
               ),
-              Expanded(child: _bodyWidget(state.characterInfo)[_selectedIndex]),
+              Expanded(
+                child: _bodyWidget(
+                    state.characterInfo, state.imageUrl)[_selectedIndex],
+              ),
             ],
           ),
         ),
@@ -102,7 +103,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  List<Widget> _bodyWidget(CharacterInfo character) {
+  List<Widget> _bodyWidget(CharacterInfo character, String? imageUrl) {
     return [
       HomeScreen(
         characterInfo: character,
@@ -111,6 +112,7 @@ class _MainPageState extends ConsumerState<MainPage> {
         },
         onRefresh: () =>
             ref.read(mainPageControllerProvider.notifier).pullToRefresh(),
+        imageUrl: imageUrl,
       ),
       const ListScreen(),
     ];

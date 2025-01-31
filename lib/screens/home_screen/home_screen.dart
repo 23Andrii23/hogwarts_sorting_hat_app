@@ -7,11 +7,13 @@ class HomeScreen extends StatelessWidget {
   final CharacterInfo characterInfo;
   final Function(String?) onHouseSelected;
   final VoidCallback onRefresh;
+  final String? imageUrl;
 
   const HomeScreen({
     required this.characterInfo,
     required this.onHouseSelected,
     required this.onRefresh,
+    this.imageUrl,
     super.key,
   });
 
@@ -34,19 +36,26 @@ class HomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: characterInfo.image ?? '',
-                      errorWidget: (context, url, error) => const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.error),
-                          Text('Image not found'),
-                        ],
-                      ),
-                      height: 200,
-                      width: 150,
-                      fit: BoxFit.cover,
-                    ),
+                    child: imageUrl?.isNotEmpty ?? false
+                        ? CachedNetworkImage(
+                            imageUrl: imageUrl!,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) => const Center(
+                              child: Icon(Icons.error),
+                            ),
+                            height: 200,
+                            width: 150,
+                            fit: BoxFit.cover,
+                          )
+                        : const SizedBox(
+                            height: 200,
+                            width: 150,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
                   ),
                   const SizedBox(height: 10),
                   Text(

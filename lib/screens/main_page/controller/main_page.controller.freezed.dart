@@ -20,6 +20,7 @@ mixin _$MainPageState {
   int get totalAttempts => throw _privateConstructorUsedError;
   int get successAttempts => throw _privateConstructorUsedError;
   int get failedAttempts => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -38,7 +39,8 @@ abstract class $MainPageStateCopyWith<$Res> {
       {CharacterInfo characterInfo,
       int totalAttempts,
       int successAttempts,
-      int failedAttempts});
+      int failedAttempts,
+      String? imageUrl});
 
   $CharacterInfoCopyWith<$Res> get characterInfo;
 }
@@ -62,6 +64,7 @@ class _$MainPageStateCopyWithImpl<$Res, $Val extends MainPageState>
     Object? totalAttempts = null,
     Object? successAttempts = null,
     Object? failedAttempts = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       characterInfo: null == characterInfo
@@ -80,6 +83,10 @@ class _$MainPageStateCopyWithImpl<$Res, $Val extends MainPageState>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -106,7 +113,8 @@ abstract class _$$MainPageStateImplCopyWith<$Res>
       {CharacterInfo characterInfo,
       int totalAttempts,
       int successAttempts,
-      int failedAttempts});
+      int failedAttempts,
+      String? imageUrl});
 
   @override
   $CharacterInfoCopyWith<$Res> get characterInfo;
@@ -129,6 +137,7 @@ class __$$MainPageStateImplCopyWithImpl<$Res>
     Object? totalAttempts = null,
     Object? successAttempts = null,
     Object? failedAttempts = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$MainPageStateImpl(
       characterInfo: null == characterInfo
@@ -147,18 +156,25 @@ class __$$MainPageStateImplCopyWithImpl<$Res>
           ? _value.failedAttempts
           : failedAttempts // ignore: cast_nullable_to_non_nullable
               as int,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MainPageStateImpl implements _MainPageState {
+class _$MainPageStateImpl
+    with DiagnosticableTreeMixin
+    implements _MainPageState {
   const _$MainPageStateImpl(
       {required this.characterInfo,
       required this.totalAttempts,
       required this.successAttempts,
-      required this.failedAttempts});
+      required this.failedAttempts,
+      this.imageUrl});
 
   @override
   final CharacterInfo characterInfo;
@@ -168,10 +184,24 @@ class _$MainPageStateImpl implements _MainPageState {
   final int successAttempts;
   @override
   final int failedAttempts;
+  @override
+  final String? imageUrl;
 
   @override
-  String toString() {
-    return 'MainPageState(characterInfo: $characterInfo, totalAttempts: $totalAttempts, successAttempts: $successAttempts, failedAttempts: $failedAttempts)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MainPageState(characterInfo: $characterInfo, totalAttempts: $totalAttempts, successAttempts: $successAttempts, failedAttempts: $failedAttempts, imageUrl: $imageUrl)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MainPageState'))
+      ..add(DiagnosticsProperty('characterInfo', characterInfo))
+      ..add(DiagnosticsProperty('totalAttempts', totalAttempts))
+      ..add(DiagnosticsProperty('successAttempts', successAttempts))
+      ..add(DiagnosticsProperty('failedAttempts', failedAttempts))
+      ..add(DiagnosticsProperty('imageUrl', imageUrl));
   }
 
   @override
@@ -186,12 +216,14 @@ class _$MainPageStateImpl implements _MainPageState {
             (identical(other.successAttempts, successAttempts) ||
                 other.successAttempts == successAttempts) &&
             (identical(other.failedAttempts, failedAttempts) ||
-                other.failedAttempts == failedAttempts));
+                other.failedAttempts == failedAttempts) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, characterInfo, totalAttempts,
-      successAttempts, failedAttempts);
+      successAttempts, failedAttempts, imageUrl);
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -207,7 +239,8 @@ abstract class _MainPageState implements MainPageState {
       {required final CharacterInfo characterInfo,
       required final int totalAttempts,
       required final int successAttempts,
-      required final int failedAttempts}) = _$MainPageStateImpl;
+      required final int failedAttempts,
+      final String? imageUrl}) = _$MainPageStateImpl;
 
   @override
   CharacterInfo get characterInfo;
@@ -217,6 +250,8 @@ abstract class _MainPageState implements MainPageState {
   int get successAttempts;
   @override
   int get failedAttempts;
+  @override
+  String? get imageUrl;
 
   /// Create a copy of MainPageState
   /// with the given fields replaced by the non-null parameter values.
