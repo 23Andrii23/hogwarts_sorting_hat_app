@@ -76,7 +76,9 @@ class _MainPageState extends ConsumerState<MainPage> {
               ),
               Expanded(
                 child: _bodyWidget(
-                    state.characterInfo, state.imageUrl)[_selectedIndex],
+                  state.characterInfo,
+                  state.characterImages,
+                )[_selectedIndex],
               ),
             ],
           ),
@@ -103,7 +105,8 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  List<Widget> _bodyWidget(CharacterInfo character, String? imageUrl) {
+  List<Widget> _bodyWidget(
+      CharacterInfo character, Map<String, String> characterImages) {
     return [
       HomeScreen(
         characterInfo: character,
@@ -112,9 +115,11 @@ class _MainPageState extends ConsumerState<MainPage> {
         },
         onRefresh: () =>
             ref.read(mainPageControllerProvider.notifier).pullToRefresh(),
-        imageUrl: imageUrl,
+        imageUrl: characterImages[character.id],
       ),
-      const ListScreen(),
+      ListScreen(
+        characterImages: characterImages,
+      ),
     ];
   }
 }

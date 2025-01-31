@@ -6,10 +6,12 @@ import 'package:hogwarts/screens/character_details_screen/controller/character_d
 class CharacterDetailsScreen extends ConsumerWidget {
   final String characterId;
   final bool showInfo;
+  final String? imageUrl;
 
   const CharacterDetailsScreen({
     required this.characterId,
     required this.showInfo,
+    required this.imageUrl,
     super.key,
   });
 
@@ -59,7 +61,7 @@ class CharacterDetailsScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: CachedNetworkImage(
-                  imageUrl: character.image ?? '',
+                  imageUrl: imageUrl ?? '',
                   height: 250,
                   width: 200,
                   fit: BoxFit.cover,
