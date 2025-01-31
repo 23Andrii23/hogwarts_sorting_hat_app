@@ -131,7 +131,6 @@ class MainPageController extends _$MainPageController {
     state.whenData((value) {
       state = AsyncData(value.copyWith(
         characterInfo: getRandCharacter(),
-        characterImages: {},
       ));
     });
   }
